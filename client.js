@@ -23,9 +23,34 @@ function loadTestData(){
                     "earnedScore": 12,
                     "letterGrade": "B-",
                     "passed": true
+                },
+                {
+                    "name": "Test 1",
+                    "possibleScore": 100,
+                    "earnedScore": 95,
+                    "letterGrade": "A",
+                    "passed": true
                 }
             ]
         }
 
     ]
+}
+
+/**
+ * Takes in a student's array of assignments and returns the average grade of those assignments
+ * 
+ * @param {array} assignments the array of assignments to read
+ * @returns {number} the average score out of 100 for the assignments
+ */
+function findAverageScore (assignments){
+    const possibleScore = 0;
+    const earnedScore = 0;
+    assignments.forEach(assignment => {
+        possibleScore += assignment.possibleScore
+        earnedScore += assignment.earnedScore
+    })
+
+    const average = earnedScore/possibleScore
+    return (average*100).toFixed(1)
 }

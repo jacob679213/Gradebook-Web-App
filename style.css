@@ -1,0 +1,14 @@
+/*Writen by Jacob Bitter*/
+
+body{
+    color: black;
+    background-color: white;
+}
+
+table, th, td{
+    border: 1px solid black;
+}
+
+th, td{
+    width: 200px;
+}

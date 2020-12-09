@@ -2,9 +2,10 @@ Gradebook Web App
 Made By: Jacob Bitter
 
 # TODO: 
-    -Create basic HTML page
-    -Make fake data to write JavaScript arround
-    -Write Javascript to handle/display data
+    -Create basic HTML page                             DONE
+    -Make fake data to write JavaScript arround         DONE
+    -Write Javascript to handle/display data            DONE
+    -Allow teacher to view Individual Grades
 
 Data Structure:
     

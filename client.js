@@ -1,18 +1,25 @@
 //Written by Jacob Bitter
-const data = loadTestData()
-const $gradeTable = document.getElementById("gradeTable")
 
 renderData()
 
 /**
  * Takes in student data and turns it into HTMP for the page to load
- * @todo Make the student's name a button or a link or something, so clicking on it will show a more detailed view of what the student's grades are
  */
 function renderData(){
+    const data = loadTestData()
+    const $gradeTable = document.getElementById("gradeTable")
+
     data.students.forEach(student => {
-        const $studentGrade = document.createElement("tr")
-        $studentGrade.innerHTML = `<td>${student.lastName}, ${student.firstName}</td><td>${findAverageScore(student.assignments)}</td>`
-        $gradeTable.append($studentGrade)
+        const $studentBlock = document.createElement("tr")
+        const $studentName = document.createElement("td")
+        const $studentGrade = document.createElement("td")
+
+        $studentName.innerHTML = `<a href = "singleStudentGrade.html">${student.lastName}, ${student.firstName}</a>`
+        $studentGrade.innerHTML = `${findAverageScore(student.assignments)}`
+
+        $studentBlock.append($studentName)
+        $studentBlock.append($studentGrade)
+        $gradeTable.append($studentBlock)
     })
 }
 
@@ -80,7 +87,7 @@ function loadTestData(){
                 {
                     "name": "Homework 2",
                     "possibleScore": 15,
-                    "earnedScore": 7,
+                    "earnedScore": 6,
                     "letterGrade": "F",
                     "passed": false
                 },

@@ -11,13 +11,25 @@
     <body>
         <h1>Gradebook</h1>
         <br>
-        <div id="grades">
-            <table id="gradeTable">
+        <div id="classGrades">
+            <table id="classGradeTable">
                 <tr>
                     <th>Student</th>
                     <th>Grade</th>
                 </tr>
                 
+            </table>
+        </div>
+
+        <div id="studentGrades">
+            <h2 id = "studentNameBox"></h2>
+            <a onclick="renderClassData">Back to Class Page</a>
+            <table id="studentGradeTable">
+                <tr>
+                    <th>Assignment</th>
+                    <th>Score</th>
+                    <th>Letter Grade</th>
+                </tr>
             </table>
         </div>
 

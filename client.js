@@ -1,25 +1,48 @@
 //Written by Jacob Bitter
 
-renderData()
+renderClassData()
 
 /**
  * Takes in student data and turns it into HTMP for the page to load
  */
-function renderData(){
+function renderClassData(){
     const data = loadTestData()
-    const $gradeTable = document.getElementById("gradeTable")
+    const $classGradeTable = document.getElementById("classGradeTable")
 
     data.students.forEach(student => {
         const $studentBlock = document.createElement("tr")
         const $studentName = document.createElement("td")
         const $studentGrade = document.createElement("td")
 
-        $studentName.innerHTML = `<a href = "singleStudentGrade.html">${student.lastName}, ${student.firstName}</a>`
+        $studentName.innerHTML = `<a>${student.lastName}, ${student.firstName}</a>`
+        $studentName.addEventListener("click", renderStudentData(student))
         $studentGrade.innerHTML = `${findAverageScore(student.assignments)}`
 
         $studentBlock.append($studentName)
         $studentBlock.append($studentGrade)
-        $gradeTable.append($studentBlock)
+        $classGradeTable.append($studentBlock)
+    })
+}
+
+function renderStudentData(student){
+    const $studentGradeTable = document.getElementById("studentGradeTable")
+    document.getElementById("studentNameBox").innerHTML = `${student.firstName} ${student.lastName}`
+
+    student.assignments.forEach(assignment => {
+        const $assignmentRow = document.createElement("tr")
+        const $assignmentName = document.createElement("td")
+        const $assignmentScore = document.createElement("td")
+        const $assignmentGrade = document.createElement("td")
+
+        $assignmentName.innerHTML = `${assignment.name}`
+        $assignmentScore.innerHTML = `${assignment.earnedScore}/${assignment.possibleScore}`
+        $assignmentGrade.innerHTML = `${assignment.letterGrade}`
+
+        $assignmentRow.append($assignmentName)
+        $assignmentRow.append($assignmentScore)
+        $assignmentRow.append($assignmentGrade)
+
+        $studentGradeTable.append($assignmentRow)
     })
 }
 

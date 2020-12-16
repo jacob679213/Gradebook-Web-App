@@ -20,6 +20,10 @@ tr.pass{
 tr.fail{
     color: red;
 }
-div#studentGrades{
+
+div#classGrades{
     display: block;
+}
+div#studentGrades{
+    display: none;
 }

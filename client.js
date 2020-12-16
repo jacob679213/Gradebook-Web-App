@@ -14,8 +14,11 @@ function renderClassData(){
         const $studentName = document.createElement("td")
         const $studentGrade = document.createElement("td")
 
-        $studentName.innerHTML = `<a>${student.lastName}, ${student.firstName}</a>`
-        $studentName.addEventListener("click", renderStudentData(student))
+        const $studentButton = document.createElement("button")
+        $studentButton.innerHTML = `${student.lastName}, ${student.firstName}`
+        $studentButton.onclick = function(){renderStudentData(student)}
+
+        $studentName.append($studentButton)
         $studentGrade.innerHTML = `${findAverageScore(student.assignments)}`
 
         $studentBlock.append($studentName)
@@ -25,8 +28,13 @@ function renderClassData(){
 }
 
 function renderStudentData(student){
+    console.log(student.firstName + student.lastName)
+
     const $studentGradeTable = document.getElementById("studentGradeTable")
     document.getElementById("studentNameBox").innerHTML = `${student.firstName} ${student.lastName}`
+    $studentGradeTable.innerHTML = "<tr> <th>Assignment</th> <th>Score</th> <th>Letter Grade</th> </tr>"
+
+    flipVisibility()
 
     student.assignments.forEach(assignment => {
         const $assignmentRow = document.createElement("tr")
@@ -44,6 +52,19 @@ function renderStudentData(student){
 
         $studentGradeTable.append($assignmentRow)
     })
+}
+
+function flipVisibility(){
+    const $class = document.getElementById("classGrades")
+    const $student = document.getElementById("studentGrades")
+    if($class.style.display == "block"){
+        $class.style.display = "none"
+        $student.style.display = "block"
+    }
+    else{
+        $class.style.display = "block"
+        $student.style.display = "none"
+    }
 }
 
 /**

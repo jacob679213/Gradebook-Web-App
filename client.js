@@ -1,19 +1,70 @@
 //Written by Jacob Bitter
-const data = loadTestData()
-const $gradeTable = document.getElementById("gradeTable")
 
-renderData()
+renderClassData()
 
 /**
  * Takes in student data and turns it into HTMP for the page to load
- * @todo Make the student's name a button or a link or something, so clicking on it will show a more detailed view of what the student's grades are
  */
-function renderData(){
+function renderClassData(){
+    const data = loadTestData()
+    const $classGradeTable = document.getElementById("classGradeTable")
+
     data.students.forEach(student => {
-        const $studentGrade = document.createElement("tr")
-        $studentGrade.innerHTML = `<td>${student.lastName}, ${student.firstName}</td><td>${findAverageScore(student.assignments)}</td>`
-        $gradeTable.append($studentGrade)
+        const $studentBlock = document.createElement("tr")
+        const $studentName = document.createElement("td")
+        const $studentGrade = document.createElement("td")
+
+        const $studentButton = document.createElement("button")
+        $studentButton.innerHTML = `${student.lastName}, ${student.firstName}`
+        $studentButton.onclick = function(){renderStudentData(student)}
+
+        $studentName.append($studentButton)
+        $studentGrade.innerHTML = `${findAverageScore(student.assignments)}`
+
+        $studentBlock.append($studentName)
+        $studentBlock.append($studentGrade)
+        $classGradeTable.append($studentBlock)
     })
+}
+
+function renderStudentData(student){
+    console.log(student.firstName + student.lastName)
+
+    const $studentGradeTable = document.getElementById("studentGradeTable")
+    document.getElementById("studentNameBox").innerHTML = `${student.firstName} ${student.lastName}`
+    $studentGradeTable.innerHTML = "<tr> <th>Assignment</th> <th>Score</th> <th>Letter Grade</th> </tr>"
+
+    flipVisibility()
+
+    student.assignments.forEach(assignment => {
+        const $assignmentRow = document.createElement("tr")
+        const $assignmentName = document.createElement("td")
+        const $assignmentScore = document.createElement("td")
+        const $assignmentGrade = document.createElement("td")
+
+        $assignmentName.innerHTML = `${assignment.name}`
+        $assignmentScore.innerHTML = `${assignment.earnedScore}/${assignment.possibleScore}`
+        $assignmentGrade.innerHTML = `${assignment.letterGrade}`
+
+        $assignmentRow.append($assignmentName)
+        $assignmentRow.append($assignmentScore)
+        $assignmentRow.append($assignmentGrade)
+
+        $studentGradeTable.append($assignmentRow)
+    })
+}
+
+function flipVisibility(){
+    const $class = document.getElementById("classGrades")
+    const $student = document.getElementById("studentGrades")
+    if($class.style.display == "block"){
+        $class.style.display = "none"
+        $student.style.display = "block"
+    }
+    else{
+        $class.style.display = "block"
+        $student.style.display = "none"
+    }
 }
 
 /**
@@ -80,7 +131,7 @@ function loadTestData(){
                 {
                     "name": "Homework 2",
                     "possibleScore": 15,
-                    "earnedScore": 7,
+                    "earnedScore": 6,
                     "letterGrade": "F",
                     "passed": false
                 },

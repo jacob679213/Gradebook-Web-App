@@ -12,3 +12,18 @@ table, th, td{
 th, td{
     width: 200px;
 }
+
+tr.pass{
+    color: green;
+}
+
+tr.fail{
+    color: red;
+}
+
+div#classGrades{
+    display: block;
+}
+div#studentGrades{
+    display: none;
+}
